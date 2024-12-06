@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   
+  
   namespace :admin do
     #urlにadminが指定される
-    get 'homes/top'
+    get 'homes/top' => 'homes#top', as: 'top'
   end
   devise_for :admins, skip: [:registraions, :passwords], controllers: {
     sessions: 'admin/sessions'
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   }
   
   scope module: :public do
+    root to: "homes#top"
     #urlにpublicが指定されない
     get 'customers/mypage' => 'customers#show', as: 'mypage'
   end
